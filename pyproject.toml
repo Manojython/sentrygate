@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sentrygate"
+version = "0.1.1"
+description = "A local layer that catches prompt injections and masks private data out of a prompt before it leaves your machine. On-device redaction plus a fast 421M decision-model guard, no second LLM and no GPU."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["llm", "prompt-injection", "jailbreak", "guardrail", "pii", "redaction", "masking", "security", "laya"]
+# One install brings everything. The torch-free injection runtime is a core dependency,
+# so `pip install sentrygate` is all it takes; the model fetches itself on the first scan.
+# PII redaction needs none of this and runs on the standard library alone.
+dependencies = [
+    "onnxruntime>=1.17",
+    "tokenizers>=0.15",
+    "numpy>=1.24",
+    "huggingface_hub>=0.20",
+]
+
+[project.optional-dependencies]
+# Kept so `pip install sentrygate[onnx]` still resolves; the runtime is now in core.
+onnx = []
+# torch injection path, for anyone who would rather run the model through PyTorch
+laya = ["laya>=0.3"]
+# YAML contract files for the prompttest harness
+dsl = ["pyyaml>=6.0"]
+datasets = ["datasets>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/Manojython/sentrygate"
+Repository = "https://github.com/Manojython/sentrygate"
+
+[project.scripts]
+sentrygate = "sentrygate.cli:main"
+prompttest = "prompttest.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["python/sentrygate", "python/prompttest"]

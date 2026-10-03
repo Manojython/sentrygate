@@ -1,0 +1,35 @@
+[package]
+name = "sentrygate-core"
+version = "0.1.0"
+edition = "2021"
+description = "Fast local prompt-injection / jailbreak guardrail. A torch-free Laya decision model (tokenizer + ONNX Runtime + a small decode head) scoring targeted questions. The shared Rust backbone behind the Python and TypeScript packages."
+license = "MIT"
+keywords = ["llm", "prompt-injection", "jailbreak", "guardrail", "onnx"]
+categories = ["science", "text-processing"]
+
+[lib]
+name = "sentrygate_core"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "sentrygate_check"
+path = "src/bin/sentrygate_check.rs"
+
+[dependencies]
+ort         = { version = "2.0.0-rc.10", features = ["download-binaries"] }
+tokenizers  = { version = "0.21", default-features = false, features = ["onig"] }
+ndarray     = "0.16"
+rayon       = "1.10"
+serde       = { version = "1.0", features = ["derive"] }
+serde_json  = "1.0"
+thiserror   = "2.0"
+pyo3        = { version = "0.21", optional = true }
+
+[features]
+python = ["dep:pyo3"]
+extension-module = ["python", "pyo3/extension-module"]
+
+[profile.release]
+opt-level     = 3
+lto           = true
+codegen-units = 1

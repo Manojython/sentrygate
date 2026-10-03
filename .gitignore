@@ -1,0 +1,35 @@
+# Model & dataset artifacts (large; downloaded/exported locally, hosted separately).
+# laya.onnx is ~1.6 GB and the HF snapshot is multi-GB — never commit these.
+models/
+*.onnx
+*.safetensors
+
+# Golden fixtures are small and committed deliberately (see js/test/). Keep them.
+!js/test/golden_injection.json
+!js/test/golden_tokens.json
+
+# Rust
+sentrygate-core/target/
+
+# Node / TypeScript
+js/node_modules/
+js/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+*.whl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.claude/
+
+# Medium draft, kept local, not part of the code repo
+docs/

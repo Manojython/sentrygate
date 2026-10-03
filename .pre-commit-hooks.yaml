@@ -1,0 +1,7 @@
+- id: sentrygate
+  name: sentrygate (prompt-injection scan)
+  description: Scan changed text/prompt files for injection and jailbreak attempts.
+  entry: sentrygate scan
+  language: python
+  types: [text]
+  stages: [pre-commit]

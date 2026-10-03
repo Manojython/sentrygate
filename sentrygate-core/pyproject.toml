@@ -1,0 +1,16 @@
+[build-system]
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "sentrygate-core"
+version = "0.1.0"
+description = "The Rust backbone behind sentrygate: a torch-free Laya guardrail (tokenizer + ONNX Runtime + decode) with the GIL released during inference."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["llm", "prompt-injection", "jailbreak", "guardrail", "onnx", "rust"]
+
+[tool.maturin]
+features = ["extension-module"]
+module-name = "sentrygate_core"

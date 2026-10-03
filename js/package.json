@@ -1,0 +1,32 @@
+{
+  "name": "sentrygate",
+  "version": "0.1.1",
+  "description": "Local on-device guard between your app and an LLM: catch prompt injections (a 421M decision model run in-process via ONNX Runtime) and mask PII before the prompt leaves the machine. No API calls, nothing leaves your machine. Same engine as the Python package.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "data", "README.md"],
+  "keywords": ["llm", "prompt-injection", "jailbreak", "pii", "redaction", "guardrail", "security", "onnx", "laya"],
+  "homepage": "https://github.com/Manojython/sentrygate",
+  "repository": { "type": "git", "url": "https://github.com/Manojython/sentrygate" },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsx test/golden.test.ts"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.3.0",
+    "onnxruntime-node": "^1.20.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "@types/node": "^22.9.0"
+  }
+}
